@@ -27,7 +27,7 @@ endfunction//On retourne X
 
 //Partie 2
 
-//A est supposée une matrice triangulaire inférieure (et inversible)
+//A est supposée une matrice triangulaire supérieur (et inversible)
 function [X]=RESOUSUP(A, b, n)
 
     X = zeros(b)//On initialise X à 0 en fonction de la taille de b (X étant aussi un vecteur colonne à n composantes)
@@ -49,16 +49,18 @@ endfunction//On retourne X
 
 //Partie 1
 
-function [A,b]=REDUC(A, b, n)//TODO
+//Transforme AX = b en UX = Y
+//U est supposée une matrice triangulaire supérieur (et inversible)
+function [A,b]=REDUC(A, b, n)
 
     for k=1:(n-1)
         for i=(k+1):n
-            Aux = A(i,k)/A(k,k)
-            A(i,k) = 0
+            Aux = A(i,k)/A(k,k) // Calcul le nouveau coefficient
+            A(i,k) = 0 // Transforme la partie inférieur de la matrice en 0
             for j=(k+1):n
-                A(i,j) = A(i, j) - Aux*A(k,j)
+                A(i,j) = A(i, j) - Aux*A(k,j) // Réduit la matrice A
             end
-            b(i) = b(i) - Aux*b(i)
+            b(i) = b(i) - Aux*b(i) // Calcul Y(i) qui remplace b(i)
         end
     end
 
@@ -80,23 +82,32 @@ endfunction//On retourne X
 
 //Partie 1
 
-//TODO
+//Résout AX = d sachant que A est une matrice a trois diagonales a, b et c
+//Grace aux calculs de e et f on peut retrouver X
 function [x]=RESOUTRI(a, b, c , d, n)
 
-    e = zeros(a)//On initialise e et f, vecteurs de même taille que a, b, c ou d
+    // On initialise e et f, vecteurs de même taille que a, b, c ou d
+    e = zeros(a)
     f = zeros(a)
 
+    // Calculs le premier terme de e et f
     e(1) = -c(1)/b(1)
     f(1) = d(1)/b(1)
-
+    
+   // Calculs les termes 2 à n-1 de e et f
    for i=2:(n-1)
         deno = a(i)*e(i-1)+b(i)
         e(i)= -c(i) / deno
         f(i) = (d(i) - a(i)*f(i-1))/deno
     end
+    
+    // Calculs le terme n de e et f
     f(n) = (d(n)-a(n)*f(n-1))/((a(n)*e(n-1))+b(n))
+    
+    // Calculs le terme n de x
     x(n) = f(n)
-
+    
+    // Calculs le terme n-1 à 1 de x
     for i=(n-1):-1:1
         x(i) = e(i)*x(i+1)+f(i)
     end
