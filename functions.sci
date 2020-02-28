@@ -50,17 +50,17 @@ endfunction//On retourne X
 //Partie 1
 
 //Transforme AX = b en UX = Y
-//U est supposée une matrice triangulaire supérieur (et inversible)
+//U est une matrice triangulaire supérieure (et inversible)
 function [A,b]=REDUC(A, b, n)
 
-    for k=1:(n-1)
+    for k=1:(n+1)
         for i=(k+1):n
             Aux = A(i,k)/A(k,k) // Calcul le nouveau coefficient
             A(i,k) = 0 // Transforme la partie inférieur de la matrice en 0
             for j=(k+1):n
                 A(i,j) = A(i, j) - Aux*A(k,j) // Réduit la matrice A
             end
-            b(i) = b(i) - Aux*b(i) // Calcul Y(i) qui remplace b(i)
+            b(i) = b(i) - Aux*b(k) // Calcul Y(i) qui remplace b(i)
         end
     end
 

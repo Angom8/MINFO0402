@@ -43,10 +43,10 @@ endfunction
 n=10//Taille de la matrice
 interval=10//Répartition des valeurs entre 1 et interval
 
-a = round(interval*rand(n,1))
-b = round(interval*rand(n,1))
-c = round(interval*rand(n,1))
-d = round(interval*rand(n,1))
+a = round(interval*rand(n,1));
+b = round(interval*rand(n,1));
+c = round(interval*rand(n,1));
+d = round(interval*rand(n,1));
 
 disp("a :")
 disp(a)
@@ -62,15 +62,15 @@ disp(d)
 
 sleep(5, "s")
 
-X = RESOUTRI(a, b, c, d, n)
+X = RESOUTRI(a, b, c, d, n);
 
-f=PRODMATTAB(a, b, c,d , x, n)
+f=PRODMATTAB(a, b, c,d,X, n);
 
-resultat= norm(f-X)
+resultat= norm(f-d);
 
 disp("X :")
 disp(X)
 
-disp("Norme de MX-D (vérifications) :")
+disp("Norme de MX-D (vérifications). Satisfaisant si très proche de 0:")
 disp(resultat)
 
