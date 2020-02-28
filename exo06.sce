@@ -1,27 +1,32 @@
-//TODO
-function [x]=RESOUTRI(a, b, c, d, n)
+function [x]=RESOUTRI(a, b, c , d, n)
 
-    e = zeros(a)//On initialise e et f, vecteurs de même taille que a, b, c ou d
+    // On initialise e et f, vecteurs de même taille que a, b, c ou d
+    e = zeros(a)
     f = zeros(a)
 
+    // Calculs le premier terme de e et f
     e(1) = -c(1)/b(1)
     f(1) = d(1)/b(1)
-
+    
+   // Calculs les termes 2 à n-1 de e et f
    for i=2:(n-1)
         deno = a(i)*e(i-1)+b(i)
         e(i)= -c(i) / deno
         f(i) = (d(i) - a(i)*f(i-1))/deno
     end
+    
+    // Calculs le terme n de e et f
     f(n) = (d(n)-a(n)*f(n-1))/((a(n)*e(n-1))+b(n))
+    
+    // Calculs le terme n de x
     x(n) = f(n)
-
+    
+    // Calculs le terme n-1 à 1 de x
     for i=(n-1):-1:1
         x(i) = e(i)*x(i+1)+f(i)
     end
 
 endfunction
-
-//Partie 2
 
 //On applique le produit de la matrice avec le vecteur x mais avec des tableaux séparés plutôt qu'une matrice. Nos données représentent une matrice diagonale aux valeurs a, b et c
 function f=PRODMATTAB(a, b, c,d , x, n)
@@ -40,9 +45,10 @@ endfunction
 
 //Début du script
 
-n=10//Taille de la matrice
+n=7//Taille de la matrice
 interval=10//Répartition des valeurs entre 1 et interval
 
+//On génère aléatoirement les composants de la diagonale, puis d le deuxième élément de l'équation
 a = round(interval*rand(n,1));
 b = round(interval*rand(n,1));
 c = round(interval*rand(n,1));
@@ -62,6 +68,7 @@ disp(d)
 
 sleep(5, "s")
 
+//On résoud le problème, puis on calcule la norme de MX-d
 X = RESOUTRI(a, b, c, d, n);
 
 f=PRODMATTAB(a, b, c,d,X, n);

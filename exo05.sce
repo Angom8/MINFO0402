@@ -37,11 +37,13 @@ endfunction//On retourne A et b réduits
 function [X]=GAUSS(A, b, n)
 
    [A,b] = REDUC(A,b, n)
+
    disp("A réduit :")
    disp(A)
    disp("b réduit :")
    disp(b)
    sleep(5, "s")
+
    [X] = RESOUSUP(A,b, n)
 
 endfunction//On retourne X
@@ -51,9 +53,11 @@ endfunction//On retourne X
 n=5//Taille de la matrice
 interval=10//Répartition des valeurs entre 1 et interval
 
+//On génère aléatoirement A et b
 A = round(interval*rand(n,n));
 b = round(interval*rand(n,1));
 
+//On affiche A et b
 disp("A :")
 disp(A)
 
@@ -62,11 +66,11 @@ disp(b)
 
 X = GAUSS(A, b, n);
 
-verification2 = A\b; 
+verification = A\b; 
 
 disp("X (Par la fonction) :")
 disp(X)
 
 disp("X (Par Scilab) :")
-disp(verification2)
+disp(verification)
 

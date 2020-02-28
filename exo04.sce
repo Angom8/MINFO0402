@@ -39,15 +39,19 @@ endfunction//On retourne X
 n=5//Taille de la matrice
 interval=10//Répartition des valeurs entre 1 et interval
 
-A = round(interval*rand(n,n))
-b = round(interval*rand(n,1))
+//On génère aléatoirement A et b
+A = round(interval*rand(n,n));
+b = round(interval*rand(n,1));
 
-resultat1 = RESOUINF(tril(A),b,n)
-resultat2 = RESOUSUP(triu(A),b,n)
+//On obtient le résultat de A sous forme de matrice triangulaire sup, puis inf, par b (AX = b)
+resultat1 = RESOUINF(tril(A),b,n);
+resultat2 = RESOUSUP(triu(A),b,n);
 
-verification1 = tril(A)\b
-verification2 = triu(A)\b
+//Vérification avec la méthode de scilab
+verification1 = tril(A)\b;
+verification2 = triu(A)\b;
 
+//Affichage
 disp("A :")
 disp(A)
 
