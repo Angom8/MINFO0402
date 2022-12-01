@@ -1,0 +1,19 @@
+# TP MINFO402 THEBAULT Antoine - ALVARO Luca
+
+Projet de MathInfo en Mathlab
+
+Liste des fichiers :
+
+=> ALIRE.txt : Ce fichier
+
+=> A_THEBAULT.txt (vide)
+
+=> A_ALVARO.txt (vide)
+
+=> functions.sci : Contient toutes les fonctions. Ces dernières sont également incluses dans les différents fichiers de script
+
+=> exo04.sce : Fichier scripté de l'exercice 4
+
+=> exo05.sce : Fichier scripté de l'exercice 5
+
+=> exo06.sce : Fichier scripté de l'exercice 6
